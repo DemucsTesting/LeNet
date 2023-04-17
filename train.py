@@ -15,6 +15,7 @@ from matplotlib import pyplot
 
 EPOCHS = 20
 REPS = 3
+LR = 1e-1
 
 def train_inequality():
     batch_size = 256
@@ -32,7 +33,7 @@ def train_inequality():
             print('Training %s:'%(activation.name))
 
             model = InequalityModel(activation)
-            sgd = SGD(model.parameters(), lr=1e-1)
+            sgd = SGD(model.parameters(), lr=LR)
             loss_fn = CrossEntropyLoss()
             all_epoch = EPOCHS
             
@@ -95,7 +96,7 @@ def train_recurrent():
             print('Training %s:'%(recurrence.name))
 
             model = RecurrentModel(recurrence)
-            sgd = SGD(model.parameters(), lr=1e-1)
+            sgd = SGD(model.parameters(), lr=LR)
             loss_fn = CrossEntropyLoss()
             all_epoch = EPOCHS
             accuracies = [0]*all_epoch
@@ -132,7 +133,7 @@ def train_recurrent():
 
             pyplot.xlabel("Epoch")
             pyplot.ylabel("Accuracy")
-            pyplot.plot([x+1 for x in list(range(all_epoch))], label=recurrence.name)
+            pyplot.plot([x+1 for x in list(range(all_epoch))]. accuracies, label=recurrence.name)
 
         pyplot.legend(loc='best')
         pyplot.title('Repetition #%d'%(rep))
@@ -148,7 +149,7 @@ def train_original():
     train_loader = DataLoader(train_dataset, batch_size=batch_size)
     test_loader = DataLoader(test_dataset, batch_size=batch_size)
     model = Model()
-    sgd = SGD(model.parameters(), lr=1e-1)
+    sgd = SGD(model.parameters(), lr=LR)
     loss_fn = CrossEntropyLoss()
     all_epoch = EPOCHS
     for current_epoch in range(all_epoch):
